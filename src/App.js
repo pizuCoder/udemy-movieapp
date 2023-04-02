@@ -15,19 +15,19 @@ function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch('https://swapi.dev/api/films/');
+      const response = await fetch('https://crudcrud.com/api/e55e9cf8ef0441a083263aa98a27d2ca/movies');
       if (!response.ok) {
         throw new Error('Something went wrong!');
       }
 
       const data = await response.json();
 
-      const transformedMovies = data.results.map((movieData) => {
+      const transformedMovies = data.map((movieData) => {
         return {
-          id: movieData.episode_id,
+          id: movieData._id,
           title: movieData.title,
-          openingText: movieData.opening_crawl,
-          releaseDate: movieData.release_date,
+          openingText: movieData.openingText,
+          releaseDate: movieData.releaseDate,
         };
       });
       setMovies(transformedMovies);
@@ -45,8 +45,17 @@ function App() {
   useEffect(() => {
     fetchMoviesHandler();
   }, [fetchMoviesHandler]);
-  function addMovieHandler(movie) {
-    console.log(movie);
+  
+  async function addMovieHandler(movie) {
+    const response = await fetch('https://crudcrud.com/api/e55e9cf8ef0441a083263aa98a27d2ca/movies', {
+      method: 'POST',
+      body: JSON.stringify(movie),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await response.json();
+    console.log(data);
   }
 
   const cancelRetryHandler = () => {

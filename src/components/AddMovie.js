@@ -28,7 +28,7 @@ function AddMovie(props) {
         <input type='text' id='title' ref={titleRef} />
       </div>
       <div className={classes.control}>
-        <label htmlFor='opening-text'>Opening Text</label>
+        <label htmlFor='opening-text'>Description</label>
         <textarea rows='5' id='opening-text' ref={openingTextRef}></textarea>
       </div>
       <div className={classes.control}>
